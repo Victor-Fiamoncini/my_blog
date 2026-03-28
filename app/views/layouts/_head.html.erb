@@ -1,0 +1,27 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= content_for?(:title) ? "#{yield(:title)} — #{title_suffix}" : title_suffix %></title>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "A technical blog about software engineering, PHP, and web development by Victor Fiamon." %>">
+  <meta name="author" content="Victor Fiamoncini">
+
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#60a5fa">
+
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  <%= stylesheet_link_tag "catppuccin-macchiato" %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>
+    document.addEventListener("turbo:load", () => hljs.highlightAll());
+  </script>
+
+  <%= yield :head if content_for?(:head) %>
+</head>

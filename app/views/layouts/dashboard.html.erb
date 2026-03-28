@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= content_for?(:title) ? "#{yield(:title)} — Dashboard" : "Dashboard" %></title>
+  <% content_for :head do %>
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
-  </head>
+  <% end %>
+  <%= render "layouts/head", title_suffix: "Dashboard" %>
 
   <body class="bg-stone-400 font-sans antialiased">
     <header class="border-b-4 border-black bg-white sticky top-0 z-50">

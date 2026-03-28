@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= content_for?(:title) ? "#{yield(:title)} — Victor's Blog" : "Victor's Blog" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "A technical blog about software engineering, PHP, and web development by Victor Fiamon." %>">
-    <meta name="author" content="Victor Fiamoncini">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-    <%= stylesheet_link_tag "catppuccin-macchiato" %>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-    <script>
-      document.addEventListener("turbo:load", () => hljs.highlightAll());
-    </script>
-  </head>
+  <%= render "layouts/head", title_suffix: "Victor's Blog" %>
 
   <body class="bg-stone-400 font-sans antialiased">
     <header class="border-b-4 border-black bg-white sticky top-0 z-50">
