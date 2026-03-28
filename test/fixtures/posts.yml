@@ -1,0 +1,23 @@
+published:
+  title: My Published Post
+  slug: my-published-post
+  content: This is the full content of the published post.
+  excerpt: A short excerpt for the published post.
+  is_published: true
+  published_at: <%= 1.day.ago %>
+
+draft:
+  title: My Draft Post
+  slug: my-draft-post
+  content: This is a draft post content.
+  excerpt: Draft excerpt.
+  is_published: false
+  published_at: null
+
+future:
+  title: My Future Post
+  slug: my-future-post
+  content: This post is scheduled for the future.
+  excerpt: Future post excerpt.
+  is_published: true
+  published_at: <%= 1.day.from_now %>

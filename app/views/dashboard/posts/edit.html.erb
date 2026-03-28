@@ -1,0 +1,14 @@
+<% content_for :title, "Edit Post" %>
+
+<div class="flex items-center gap-4 mb-8">
+  <%= link_to "← Posts", dashboard_root_path, class: "font-black uppercase text-sm border-b-4 border-black hover:border-blue-400 pb-1 transition-all" %>
+  <h1 class="text-4xl font-black uppercase tracking-tight">Edit Post</h1>
+</div>
+
+<% if flash[:success] %>
+  <div class="mb-6 border-4 border-black bg-green-400 shadow-[4px_4px_0px_#60a5fa] px-5 py-3 font-bold uppercase text-sm">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
+<%= render "form", post: @post %>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= content_for?(:title) ? "#{yield(:title)} — Victor's Blog" : "Victor's Blog" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "A technical blog about software engineering, PHP, and web development by Victor Fiamon." %>">
+    <meta name="author" content="Victor Fiamoncini">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-stone-400 font-sans antialiased">
+    <header class="border-b-4 border-black bg-white sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+        <%= link_to "Victor's Blog", root_path, class: "text-2xl font-black uppercase tracking-tight hover:text-blue-400 transition-colors" %>
+        <nav class="flex items-center gap-4">
+          <%= link_to "Posts", root_path, class: "text-sm font-black uppercase tracking-widest border-b-4 border-black hover:border-blue-400 transition-all pb-1" %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <%= yield %>
+    </main>
+
+    <footer class="border-t-4 border-black bg-white mt-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex items-center justify-between">
+        <span class="font-black uppercase tracking-widest text-sm">Victor's Blog</span>
+        <span class="text-sm font-bold text-gray-500">Copyright &copy; <%= Time.current.year %> Victor Fiamoncini</span>
+      </div>
+    </footer>
+  </body>
+</html>

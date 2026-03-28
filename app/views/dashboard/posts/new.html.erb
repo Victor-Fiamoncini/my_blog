@@ -1,0 +1,8 @@
+<% content_for :title, "New Post" %>
+
+<div class="flex items-center gap-4 mb-8">
+  <%= link_to "← Posts", dashboard_root_path, class: "font-black uppercase text-sm border-b-4 border-black hover:border-blue-400 pb-1 transition-all" %>
+  <h1 class="text-4xl font-black uppercase tracking-tight">New Post</h1>
+</div>
+
+<%= render "form", post: @post %>

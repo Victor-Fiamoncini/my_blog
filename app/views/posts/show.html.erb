@@ -1,0 +1,37 @@
+<% content_for :title, @post.title %>
+<% content_for :description, @post.excerpt.presence || truncate(strip_tags(markdown(@post.content)), length: 160) %>
+
+<%# Back %>
+<div class="mb-8">
+  <%= link_to "← Back to posts", root_path, class: "inline-flex items-center gap-2 text-sm font-black uppercase tracking-widest border-b-4 border-black hover:border-blue-400 pb-1 transition-all" %>
+</div>
+
+<%# Article %>
+<article>
+  <header class="border-4 border-black bg-white shadow-[8px_8px_0px_#60a5fa] p-8 md:p-12 mb-10">
+    <time datetime="<%= @post.published_at.to_date %>" class="inline-block text-xs font-black uppercase tracking-[0.3em] bg-blue-400 border-2 border-black px-3 py-1 mb-6">
+      <%= @post.published_at.strftime("%B %-d, %Y") %>
+    </time>
+
+    <h1 class="text-4xl md:text-6xl font-black uppercase leading-tight tracking-tight mb-6">
+      <%= @post.title %>
+    </h1>
+
+    <% if @post.excerpt.present? %>
+      <p class="text-xl font-bold text-gray-600 leading-relaxed border-l-8 border-blue-400 pl-6">
+        <%= @post.excerpt %>
+      </p>
+    <% end %>
+  </header>
+
+  <div class="border-4 border-black bg-white shadow-[6px_6px_0px_#60a5fa] p-8 md:p-12">
+    <div class="post-content">
+      <%= markdown(@post.content) %>
+    </div>
+  </div>
+</article>
+
+<%# Footer nav %>
+<div class="mt-10 border-t-4 border-black pt-8">
+  <%= link_to "← All posts", root_path, class: "inline-flex items-center gap-2 font-black uppercase tracking-widest border-4 border-black bg-white px-6 py-3 hover:bg-blue-400 shadow-[4px_4px_0px_#60a5fa] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none transition-all" %>
+</div>

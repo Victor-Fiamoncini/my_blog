@@ -1,0 +1,28 @@
+<% content_for :title, "Login" %>
+
+<div class="min-h-screen flex items-center justify-center bg-stone-400 px-4">
+  <div class="w-full max-w-md">
+    <div class="border-4 border-black bg-white shadow-[8px_8px_0px_#60a5fa] p-8">
+      <h1 class="text-4xl font-black uppercase tracking-tight mb-2">Admin Login</h1>
+      <p class="text-sm font-bold text-gray-600 uppercase tracking-widest mb-8">Blog Dashboard Access</p>
+
+      <% if flash[:alert] %>
+        <p class="mb-6 text-sm font-bold text-red-600 border-2 border-red-600 bg-red-50 px-3 py-2"><%= flash[:alert] %></p>
+      <% end %>
+
+      <%= form_with url: login_path, method: :post, class: "space-y-6" do |f| %>
+        <div>
+          <label for="email" class="block text-sm font-black uppercase tracking-widest mb-2">Email</label>
+          <%= f.email_field :email, id: "email", class: "w-full border-4 border-black px-4 py-3 font-bold text-base focus:outline-none focus:bg-blue-50 transition-colors", placeholder: "admin@blog.com", autocomplete: "email" %>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-black uppercase tracking-widest mb-2">Password</label>
+          <%= f.password_field :password, id: "password", class: "w-full border-4 border-black px-4 py-3 font-bold text-base focus:outline-none focus:bg-blue-50 transition-colors", placeholder: "••••••••", autocomplete: "current-password" %>
+        </div>
+
+        <%= f.submit "Sign In", class: "cursor-pointer w-full bg-blue-400 border-4 border-black py-4 font-black uppercase text-lg tracking-widest hover:bg-blue-300 shadow-[4px_4px_0px_#60a5fa] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none transition-all" %>
+      <% end %>
+    </div>
+  </div>
+</div>
