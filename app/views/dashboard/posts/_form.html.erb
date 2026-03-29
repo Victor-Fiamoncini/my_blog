@@ -24,7 +24,7 @@
       <%# Content %>
       <div class="border-4 border-black bg-white shadow-[4px_4px_0px_#60a5fa] p-6">
         <label for="post_content" class="block text-xs font-black uppercase tracking-widest mb-3">Content * <span class="text-gray-400 font-bold normal-case text-xs">(Markdown supported)</span></label>
-        <%= f.text_area :content, id: "content-editor", rows: 25, class: "w-full border-4 border-black px-4 py-3 font-mono focus:outline-none transition-colors", placeholder: "Write your post content in Markdown..." %>
+        <%= f.text_area :content, rows: 25, class: "w-full border-4 border-black px-4 py-3 font-mono focus:outline-none transition-colors", placeholder: "Write your post content in Markdown...", data: { controller: "editor" } %>
         <% if post.errors[:content].any? %>
           <p class="mt-2 text-sm font-bold text-red-600 border-2 border-red-600 bg-red-50 px-3 py-2"><%= post.errors[:content].first %></p>
         <% end %>
@@ -80,29 +80,3 @@
   </div>
 <% end %>
 
-<script>
-  if (window._initContentEditor) {
-    document.removeEventListener("turbo:load", window._initContentEditor);
-  }
-
-  window._initContentEditor = function() {
-    if (window._easyMDEInstance) {
-      window._easyMDEInstance.toTextArea();
-      window._easyMDEInstance = null;
-    }
-    const textarea = document.getElementById("content-editor");
-    if (textarea && typeof EasyMDE !== "undefined") {
-      window._easyMDEInstance = new EasyMDE({
-        element: textarea,
-        autofocus: false,
-        spellChecker: false,
-        toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview", "side-by-side", "fullscreen", "|", "guide"],
-        renderingConfig: { singleLineBreaks: false },
-        status: false,
-        minHeight: "600px",
-      });
-    }
-  };
-
-  document.addEventListener("turbo:load", window._initContentEditor);
-</script>
