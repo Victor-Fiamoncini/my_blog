@@ -26,13 +26,13 @@ bin/ci           # Full CI: setup + lint + security + tests
 
 ### Public vs. Admin separation
 
-There are two distinct areas with separate layouts (`application.html.erb` vs `dashboard.html.erb`):
+Two distinct areas with separate layouts (`application.html.erb` vs `dashboard.html.erb`):
 
-- **Public** (`PostsController`): read-only, shows only published posts
+- **Public** (`PostsController`): read-only, shows only published posts, routed by slug (`posts/:slug`)
 - **Admin** (`Dashboard::PostsController`): full CRUD, requires login via `before_action :require_login`
 - **Auth** (`SessionsController`): session-based login with `has_secure_password`
 
-Any authenticated user is an admin — there's no roles system.
+`current_user`, `logged_in?`, and `require_login` are defined on `ApplicationController`. Any authenticated user is an admin — there's no roles system.
 
 ### Post publishing model
 
@@ -43,17 +43,25 @@ Posts have two fields controlling visibility: `is_published` (boolean) and `publ
 - Edit while published → preserves original `published_at`
 - Unpublish → clears `published_at`
 
+A `toggle_published` member action (`PATCH /dashboard/posts/:id/toggle_published`) provides a quick publish/unpublish toggle from the index list.
+
 ### Slug generation
 
 `Post` auto-generates a slug from the title on creation (before_validation). Special characters are stripped, spaces become hyphens. Collisions are resolved by appending `-1`, `-2`, etc. Manually setting a slug before save skips auto-generation.
 
+### Markdown rendering
+
+`ApplicationHelper#markdown(text)` renders post content using Redcarpet with autolink, tables, fenced code blocks, strikethrough, and superscript. Links open in a new tab (`target="_blank"`). This helper is used in post views; the admin editor uses EasyMDE (a client-side Markdown editor loaded via import map from CDN).
+
 ### Test helpers
 
-A test-only route exists at `/test/login/:user_id` (conditionally defined in `config/routes.rb`) to bypass the password dance in tests.
+A test-only route exists at `/test/login/:user_id` (conditionally defined in `config/routes.rb`) to bypass the password dance in tests. System tests that interact with the EasyMDE editor use a `set_editor_content()` helper to drive the CodeMirror instance via JavaScript.
+
+Test fixtures cover three post states: published (past `published_at`), draft (`is_published = false`, no date), and future-scheduled (future `published_at`).
 
 ### JavaScript
 
-Import maps (`config/importmap.rb`) pin Turbo, Stimulus, and Highlight.js from CDN. Local JS lives in `app/javascript/`. Syntax highlighting assets are in `app/assets/highlight.min.js` and `app/assets/stylesheets/highlight/`.
+Import maps (`config/importmap.rb`) pin Turbo, Stimulus, Highlight.js, and EasyMDE from CDN. Local JS lives in `app/javascript/`. Syntax highlighting assets are in `app/assets/highlight.min.js` and `app/assets/stylesheets/highlight/`.
 
 ### Pagination
 
