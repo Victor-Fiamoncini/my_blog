@@ -8,12 +8,12 @@
 
 <%# Article %>
 <article>
-  <header class="border-4 border-black bg-white shadow-[8px_8px_0px_#60a5fa] p-8 md:p-12 mb-10">
-    <time datetime="<%= @post.published_at.to_date %>" class="inline-block text-xs font-black uppercase tracking-[0.3em] bg-blue-400 border-2 border-black px-3 py-1 mb-6">
+  <header class="border-4 border-black bg-white shadow-[8px_8px_0px_#60a5fa] p-5 sm:p-8 md:p-12 mb-8">
+    <time datetime="<%= @post.published_at.to_date %>" class="inline-block text-xs font-black uppercase tracking-[0.3em] bg-blue-400 border-2 border-black px-3 py-1 mb-5">
       <%= @post.published_at.strftime("%B %-d, %Y") %>
     </time>
 
-    <h1 class="text-4xl md:text-6xl font-black uppercase leading-tight tracking-tight mb-6">
+    <h1 class="text-2xl sm:text-4xl md:text-6xl font-black uppercase leading-tight tracking-tight mb-4 md:mb-6">
       <%= @post.title %>
     </h1>
 
@@ -24,7 +24,7 @@
     <% end %>
   </header>
 
-  <div class="border-4 border-black bg-white shadow-[6px_6px_0px_#60a5fa] p-8 md:p-12">
+  <div class="border-4 border-black bg-white shadow-[6px_6px_0px_#60a5fa] p-5 sm:p-8 md:p-12">
     <div class="post-content">
       <%= markdown(@post.content) %>
     </div>

@@ -2,16 +2,16 @@
 
 <%# Hero %>
 <section class="mb-16">
-  <div class="border-4 border-black bg-blue-400 shadow-[8px_8px_0px_#000] p-10 md:p-16">
+  <div class="border-4 border-black bg-blue-400 shadow-[8px_8px_0px_#000] p-6 sm:p-10 md:p-16">
     <p class="text-xs font-black uppercase tracking-[0.3em] mb-4 opacity-70">Welcome to</p>
     <div class="flex items-center justify-start gap-2 mb-3 flex-wrap">
-      <h1 class="text-5xl md:text-7xl font-black uppercase leading-none tracking-tight flex items-center gap-2">
-        Victor's Blog <span class="text-white text-5xl">⚡</span>
+      <h1 class="text-4xl sm:text-5xl md:text-7xl font-black uppercase leading-none tracking-tight flex items-center gap-2">
+        Victor's Blog <span class="hidden sm:inline-block text-5xl">⚡</span>
       </h1>
     </div>
     <p class="text-sm font-black uppercase tracking-[0.25em] mb-6 opacity-70">Technical Blog</p>
-    <p class="text-lg md:text-xl font-bold">
-      A technical blog about software engineering and web development by Victor Fiamon.
+    <p class="text-base md:text-xl font-bold">
+      A technical blog about software engineering, web development and Ruby 💎 by Victor Fiamon.
     </p>
   </div>
 </section>
@@ -19,8 +19,8 @@
 <%# Posts Grid %>
 <section>
   <div class="flex items-center justify-between mb-8">
-    <h2 class="text-3xl font-black uppercase tracking-tight">Latest Posts</h2>
-    <span class="text-sm font-bold uppercase tracking-widest bg-black text-white px-3 py-1"><%= @posts.total_count %> posts</span>
+    <h2 class="text-2xl md:text-3xl font-black uppercase tracking-tight">Latest Posts</h2>
+    <span class="text-xs md:text-sm font-bold uppercase tracking-widest bg-black text-white px-3 py-1"><%= @posts.total_count %> posts</span>
   </div>
 
   <% if @posts.empty? %>

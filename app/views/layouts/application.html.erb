@@ -12,12 +12,12 @@
       </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
       <%= yield %>
     </main>
 
-    <footer class="border-t-4 border-black bg-white mt-24">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex items-center justify-between">
+    <footer class="border-t-4 border-black bg-white mt-16 md:mt-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <span class="font-black uppercase tracking-widest text-sm">Victor's Blog</span>
         <span class="text-sm font-bold text-gray-500">Copyright &copy; <%= Time.current.year %> Victor Fiamoncini</span>
       </div>
