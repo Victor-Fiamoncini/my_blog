@@ -47,4 +47,16 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     get post_url("does-not-exist")
     assert_response :not_found
   end
+
+  test "GET show renders custom 404 page for unknown slug" do
+    get post_url("does-not-exist")
+    assert_select "h1", text: /404/
+    assert_select "a", text: /Back to Posts/
+  end
+
+  test "GET show renders custom 404 page for draft post" do
+    get post_url(posts(:draft).slug)
+    assert_select "h1", text: /404/
+    assert_select "a", text: /Back to Posts/
+  end
 end
