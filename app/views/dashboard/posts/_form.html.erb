@@ -6,7 +6,9 @@
       <%# Title %>
       <div class="border-4 border-black bg-white shadow-[4px_4px_0px_#60a5fa] p-6">
         <label for="post_title" class="block text-xs font-black uppercase tracking-widest mb-3">Title *</label>
+
         <%= f.text_field :title, class: "w-full border-4 border-black px-4 py-3 font-bold text-lg focus:outline-none focus:bg-blue-50 transition-colors", placeholder: "Your post title..." %>
+
         <% if post.errors[:title].any? %>
           <p class="mt-2 text-sm font-bold text-red-600 border-2 border-red-600 bg-red-50 px-3 py-2"><%= post.errors[:title].first %></p>
         <% end %>
@@ -15,7 +17,9 @@
       <%# Excerpt %>
       <div class="border-4 border-black bg-white shadow-[4px_4px_0px_#60a5fa] p-6">
         <label for="post_excerpt" class="block text-xs font-black uppercase tracking-widest mb-3">Excerpt <span class="text-gray-400">(optional)</span></label>
+
         <%= f.text_area :excerpt, rows: 3, class: "w-full border-4 border-black px-4 py-3 font-medium focus:outline-none focus:bg-blue-50 transition-colors resize-none", placeholder: "Short summary shown in the posts list..." %>
+
         <% if post.errors[:excerpt].any? %>
           <p class="mt-2 text-sm font-bold text-red-600 border-2 border-red-600 bg-red-50 px-3 py-2"><%= post.errors[:excerpt].first %></p>
         <% end %>
@@ -24,7 +28,9 @@
       <%# Content %>
       <div class="border-4 border-black bg-white shadow-[4px_4px_0px_#60a5fa] p-6">
         <label for="post_content" class="block text-xs font-black uppercase tracking-widest mb-3">Content * <span class="text-gray-400 font-bold normal-case text-xs">(Markdown supported)</span></label>
+
         <%= f.text_area :content, rows: 25, class: "w-full border-4 border-black px-4 py-3 font-mono focus:outline-none transition-colors", placeholder: "Write your post content in Markdown...", data: { controller: "editor" } %>
+
         <% if post.errors[:content].any? %>
           <p class="mt-2 text-sm font-bold text-red-600 border-2 border-red-600 bg-red-50 px-3 py-2"><%= post.errors[:content].first %></p>
         <% end %>
@@ -39,6 +45,7 @@
 
         <div class="flex items-center gap-3 mb-3">
           <%= f.check_box :is_published, class: "w-5 h-5 border-4 border-black accent-blue-400" %>
+
           <label for="post_is_published" class="cursor-pointer text-sm font-black uppercase tracking-widest"><%= post.new_record? ? "Publish now" : "Published" %></label>
         </div>
 
@@ -55,7 +62,9 @@
         <%# Slug info %>
         <div class="border-4 border-black bg-white p-6 shadow-[4px_4px_0px_#60a5fa]">
           <h3 class="text-xs font-black uppercase tracking-widest mb-3">Slug</h3>
+
           <p class="text-xs font-mono text-gray-600 break-all"><%= post.slug %></p>
+
           <% if post.is_published? %>
             <%= link_to "View live →", post_path(post.slug), target: "_blank", class: "mt-3 inline-block text-xs font-bold uppercase underline hover:text-blue-600" %>
           <% end %>
@@ -65,15 +74,39 @@
       <%# Markdown tips %>
       <div class="border-4 border-black bg-black text-white p-6">
         <h3 class="text-xs font-black uppercase tracking-widest mb-4 text-blue-400">Markdown Tips</h3>
+
         <ul class="space-y-2 text-xs font-mono">
-          <li><span class="text-blue-400"># Heading 1</span></li>
-          <li><span class="text-blue-400">## Heading 2</span></li>
-          <li><span class="text-blue-400">**bold**</span></li>
-          <li><span class="text-blue-400">*italic*</span></li>
-          <li><span class="text-blue-400">`code`</span></li>
-          <li><span class="text-blue-400">- list item</span></li>
-          <li><span class="text-blue-400">> blockquote</span></li>
-          <li><span class="text-blue-400">[text](url)</span></li>
+          <li>
+            <span class="text-blue-400"># Heading 1</span>
+          </li>
+
+          <li>
+            <span class="text-blue-400">## Heading 2</span>
+          </li>
+
+          <li>
+            <span class="text-blue-400">**bold**</span>
+          </li>
+
+          <li>
+            <span class="text-blue-400">*italic*</span>
+          </li>
+
+          <li>
+            <span class="text-blue-400">`code`</span>
+          </li>
+
+          <li>
+            <span class="text-blue-400">- list item</span>
+          </li>
+
+          <li>
+            <span class="text-blue-400">> blockquote</span>
+          </li>
+
+          <li>
+            <span class="text-blue-400">[text](url)</span>
+          </li>
         </ul>
       </div>
     </div>

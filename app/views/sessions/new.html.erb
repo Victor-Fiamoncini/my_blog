@@ -4,6 +4,7 @@
   <div class="w-full max-w-md">
     <div class="border-4 border-black bg-white shadow-[8px_8px_0px_#60a5fa] p-8">
       <h1 class="text-4xl font-black uppercase tracking-tight mb-2">Admin Login</h1>
+
       <p class="text-sm font-bold text-gray-600 uppercase tracking-widest mb-8">Blog Dashboard Access</p>
 
       <% if flash[:alert] %>
@@ -13,11 +14,13 @@
       <%= form_with url: login_path, method: :post, class: "space-y-6" do |f| %>
         <div>
           <label for="email" class="block text-sm font-black uppercase tracking-widest mb-2">Email</label>
+
           <%= f.email_field :email, id: "email", class: "w-full border-4 border-black px-4 py-3 font-bold text-base focus:outline-none focus:bg-blue-50 transition-colors", placeholder: "admin@blog.com", autocomplete: "email" %>
         </div>
 
         <div>
           <label for="password" class="block text-sm font-black uppercase tracking-widest mb-2">Password</label>
+
           <%= f.password_field :password, id: "password", class: "w-full border-4 border-black px-4 py-3 font-bold text-base focus:outline-none focus:bg-blue-50 transition-colors", placeholder: "••••••••", autocomplete: "current-password" %>
         </div>
 

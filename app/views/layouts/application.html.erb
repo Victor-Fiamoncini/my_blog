@@ -6,6 +6,7 @@
     <header class="border-b-4 border-black bg-white sticky top-0 z-50">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         <%= link_to "Victor's Blog", root_path, class: "text-2xl font-black uppercase tracking-tight hover:text-blue-400 transition-colors" %>
+
         <nav class="flex items-center gap-4">
           <%= link_to "Posts", root_path, class: "text-sm font-black uppercase tracking-widest border-b-4 border-black hover:border-blue-400 transition-all pb-1" %>
         </nav>
@@ -19,6 +20,7 @@
     <footer class="border-t-4 border-black bg-white mt-16 md:mt-24">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <span class="font-black uppercase tracking-widest text-sm">Victor's Blog</span>
+
         <span class="text-sm font-bold text-gray-500">Copyright &copy; <%= Time.current.year %> Victor Fiamoncini</span>
       </div>
     </footer>
