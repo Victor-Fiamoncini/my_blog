@@ -7,18 +7,18 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "GET login redirects to dashboard when already logged in" do
-    post login_url, params: { email: users(:admin).email, password: "password" }
+    post login_url, params: { email: users(:admin).email, password: "password1234" }
     get login_url
     assert_redirected_to dashboard_root_url
   end
 
   test "POST login with valid credentials redirects to dashboard" do
-    post login_url, params: { email: users(:admin).email, password: "password" }
+    post login_url, params: { email: users(:admin).email, password: "password1234" }
     assert_redirected_to dashboard_root_url
   end
 
   test "POST login with valid credentials sets session" do
-    post login_url, params: { email: users(:admin).email, password: "password" }
+    post login_url, params: { email: users(:admin).email, password: "password1234" }
     assert_equal users(:admin).id, session[:user_id]
   end
 
@@ -29,12 +29,12 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "POST login with unknown email renders new with 422" do
-    post login_url, params: { email: "nobody@example.com", password: "password" }
+    post login_url, params: { email: "nobody@example.com", password: "password1234" }
     assert_response :unprocessable_entity
   end
 
   test "DELETE logout clears session and redirects to root" do
-    post login_url, params: { email: users(:admin).email, password: "password" }
+    post login_url, params: { email: users(:admin).email, password: "password1234" }
     delete logout_url
     assert_nil session[:user_id]
     assert_redirected_to root_url

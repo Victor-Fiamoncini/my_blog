@@ -1,5 +1,5 @@
 email    = ENV.fetch("ADMIN_EMAIL", "admin@blog.com")
-password = ENV.fetch("ADMIN_PASSWORD", "password")
+password = ENV.fetch("ADMIN_PASSWORD", "password1234")
 
 User.find_or_create_by!(email: email) do |u|
   u.password = password

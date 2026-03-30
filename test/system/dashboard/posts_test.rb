@@ -10,7 +10,7 @@ module Dashboard
     test "can log in and reach dashboard" do
       visit login_url
       fill_in "email", with: @user.email
-      fill_in "password", with: "password"
+      fill_in "password", with: "password1234"
       click_on "Sign In"
       assert_current_path dashboard_root_path
     end

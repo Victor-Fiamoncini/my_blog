@@ -156,7 +156,7 @@ module Dashboard
     private
 
     def login
-      post login_url, params: { email: users(:admin).email, password: "password" }
+      post login_url, params: { email: users(:admin).email, password: "password1234" }
     end
   end
 end
