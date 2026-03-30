@@ -1,9 +1,16 @@
-User.find_or_create_by!(email: "admin@blog.com") do |u|
-  u.password = "password"
-  u.password_confirmation = "password"
+email    = ENV.fetch("ADMIN_EMAIL", "admin@blog.com")
+password = ENV.fetch("ADMIN_PASSWORD", "password")
+
+User.find_or_create_by!(email: email) do |u|
+  u.password = password
 end
 
-puts "Admin user: admin@blog.com / password"
+puts "Admin user: #{email}"
+
+unless Rails.env.development? || Rails.env.test?
+  puts "Skipping post seeds (non-dev/test environment)"
+  return
+end
 
 [
   {
