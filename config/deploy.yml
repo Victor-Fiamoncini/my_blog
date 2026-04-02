@@ -23,6 +23,8 @@ servers:
 proxy:
   ssl: true
   host: myblog.victorfiamon.com.br
+  healthcheck:
+    timeout: 120
 
 # Where you keep your container images.
 registry:
