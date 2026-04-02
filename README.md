@@ -8,7 +8,7 @@ A personal blog built with Ruby on Rails, featuring a public-facing reading expe
 |---|---|
 | Framework | Ruby on Rails 8.1 |
 | Language | Ruby 4.0.2 |
-| Database | PostgreSQL 17 |
+| Database | SQLite3 |
 | CSS | Tailwind CSS |
 | Frontend | Hotwire (Turbo + Stimulus) |
 | Asset pipeline | Propshaft |
@@ -24,12 +24,10 @@ A personal blog built with Ruby on Rails, featuring a public-facing reading expe
 
 - Ruby 4.0.2 (use `rbenv` or `asdf` to manage versions)
 - Bundler
-- Docker (for the PostgreSQL container)
 
 ### Setup
 
 ```bash
-docker compose up -d   # Start PostgreSQL
 bin/setup              # Install gems, prepare database, clear logs
 bin/dev                # Start the development server (Rails + Tailwind watcher)
 ```

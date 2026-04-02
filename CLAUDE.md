@@ -4,17 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Stack
 
-Ruby on Rails 8.1, PostgreSQL 17, Tailwind CSS, Hotwire (Turbo + Stimulus), Propshaft, import maps.
+Ruby on Rails 8.1, SQLite3, Tailwind CSS, Hotwire (Turbo + Stimulus), Propshaft, import maps.
 
 ## Database
 
-PostgreSQL 17 runs via Docker Compose (`compose.yml`). Start it with:
+SQLite3 is used for all environments. Database files are stored in `storage/`:
 
-```bash
-docker compose up -d
-```
+- `storage/development.sqlite3`
+- `storage/test.sqlite3`
+- `storage/production.sqlite3` (+ cache/queue/cable variants)
 
-Connection is configured in `config/database.yml`. Credentials default to `my_blog`/`password` for local dev and can be overridden via env vars: `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`. Production uses `DB_NAME` for the database name. The connection pool size is tied to `RAILS_MAX_THREADS` (default 5), and a `statement_timeout` of 5000ms is set to prevent runaway queries.
+No external database server needed. The connection pool size is tied to `RAILS_MAX_THREADS` (default 5), and a `timeout` of 5000ms is set.
 
 ## Commands
 
