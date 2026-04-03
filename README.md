@@ -82,3 +82,8 @@ bin/rubocop                         # Lint Ruby (rubocop-rails-omakase)
 bin/brakeman --no-pager             # Security scan
 bin/ci                              # Full CI: setup + lint + security + tests
 ```
+
+---
+Released in 2026
+
+By [Victor B. Fiamoncini](https://github.com/Victor-Fiamoncini) ☕️
