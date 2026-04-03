@@ -23,6 +23,7 @@ servers:
 proxy:
   ssl: true
   host: myblog.victorfiamon.com.br
+  app_port: 3000
   healthcheck:
     timeout: 120
 
