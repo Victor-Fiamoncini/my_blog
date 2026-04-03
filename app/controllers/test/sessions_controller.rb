@@ -1,5 +1,3 @@
-return unless Rails.env.test?
-
 module Test
   class SessionsController < ApplicationController
     def create

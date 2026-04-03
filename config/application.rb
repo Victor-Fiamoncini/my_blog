@@ -16,6 +16,9 @@ module MyBlog
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    # Exclude test-only controllers from autoloading in non-test environments.
+    Rails.autoloaders.main.ignore(Rails.root.join("app/controllers/test")) unless Rails.env.test?
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
