@@ -83,6 +83,21 @@ bin/brakeman --no-pager             # Security scan
 bin/ci                              # Full CI: setup + lint + security + tests
 ```
 
+## Stress Testing
+
+Load testing uses [k6](https://k6.io/) via Docker Compose. Requires Docker and the `RAILS_MASTER_KEY`.
+
+```bash
+RAILS_MASTER_KEY=<key> docker compose -f compose.stress.yml up --build
+```
+
+`compose.stress.yml` spins up two containers:
+
+- **app** — Rails + Puma under resource constraints (1 CPU / 2 GB), seeded with 1 admin user and 21 published posts via `db/seeds/stress.rb`
+- **k6** — Grafana k6 running `stress/load_test.js`
+
+The load profile ramps from 10 → 200 virtual users over ~7 minutes, simulating realistic read-only traffic (70% index, 30% post show). SLA thresholds: p95 < 1 s, p99 < 2 s, error rate < 1%.
+
 ---
 Released in 2026
 

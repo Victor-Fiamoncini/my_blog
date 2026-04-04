@@ -30,7 +30,19 @@ bin/rails test path/to/test.rb:42  # Run a single test at a line
 bin/rubocop      # Lint Ruby (rubocop-rails-omakase style)
 bin/brakeman --no-pager  # Security scan
 bin/ci           # Full CI: setup + lint + security + tests
+
+# Stress testing (requires Docker)
+RAILS_MASTER_KEY=<key> docker compose -f compose.stress.yml up --build
 ```
+
+### Stress test setup
+
+`compose.stress.yml` orchestrates two containers:
+
+- **app**: Rails + Puma (1 CPU / 2 GB limit), seeded via `db/seeds/stress.rb` through `bin/stress-entrypoint`
+- **k6**: Grafana k6 running `stress/load_test.js`
+
+The seed creates 1 admin user and 21 published posts. k6 ramps from 10 → 200 virtual users over ~7 minutes simulating realistic read-only traffic (70% index, 30% post show). Thresholds: p95 < 1 s, p99 < 2 s, error rate < 1%.
 
 ## Architecture
 
