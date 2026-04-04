@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+./bin/rails db:prepare
+./bin/rails runner "load Rails.root.join('db/seeds/stress.rb')"
+exec ./bin/thrust ./bin/rails server

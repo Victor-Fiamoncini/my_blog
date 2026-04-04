@@ -1,0 +1,63 @@
+services:
+  app:
+    build: .
+    environment:
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      RAILS_MAX_THREADS: "5"
+      WEB_CONCURRENCY: "2"
+    volumes:
+      - sqlite_data:/rails/storage
+    command: ["./bin/stress-entrypoint"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 2g
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:80/up"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+
+  k6:
+    image: grafana/k6:latest
+    volumes:
+      - ./stress:/scripts
+    environment:
+      BASE_URL: "http://app"
+      # Slugs generated from the 20 posts seeded in db/seeds/stress.rb
+      POST_SLUGS: >-
+        getting-started-with-ruby-on-rails,
+        understanding-activerecord-associations,
+        tailwind-css-tips-for-rails-developers,
+        hotwire-and-turbo-real-time-rails-without-writing-javascript,
+        sqlite-in-production-when-its-the-right-choice,
+        deploying-rails-with-kamal,
+        writing-fast-rails-tests-with-minitest,
+        kaminari-pagination-patterns,
+        markdown-rendering-with-redcarpet,
+        stimulusjs-controllers-for-rails-developers,
+        rails-security-checklist,
+        import-maps-in-rails-8,
+        propshaft-rails-new-asset-pipeline,
+        background-jobs-with-solid-queue,
+        caching-strategies-in-rails,
+        building-a-json-api-with-rails,
+        activestorage-for-file-uploads,
+        action-mailer-in-production,
+        debugging-rails-apps-with-pry-and-debug,
+        performance-profiling-with-rack-mini-profiler,
+        structuring-large-rails-applications
+    command: run /scripts/load_test.js
+    depends_on:
+      app:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512m
+
+volumes:
+  sqlite_data:
