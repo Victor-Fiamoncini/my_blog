@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  rate_limit to: 5, within: 1.minute, only: [ :create ]
+
   def new
     redirect_to dashboard_root_path if logged_in?
   end

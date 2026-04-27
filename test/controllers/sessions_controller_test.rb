@@ -1,6 +1,8 @@
 require "test_helper"
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
+  setup { Rails.cache.clear }
+
   test "GET login returns 200" do
     get login_url
     assert_response :success
@@ -38,5 +40,11 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     delete logout_url
     assert_nil session[:user_id]
     assert_redirected_to root_url
+  end
+
+  # rate limiting
+  test "POST login returns 429 after exceeding 5 attempts per minute" do
+    6.times { post login_url, params: { email: "x@x.com", password: "wrong" } }
+    assert_response :too_many_requests
   end
 end

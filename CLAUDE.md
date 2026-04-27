@@ -50,6 +50,8 @@ The seed creates 1 admin user and 21 published posts. k6 ramps from 10 → 200 v
 
 Public endpoints (`PostsController#index` and `PostsController#show`) are rate-limited to 30 requests per minute per IP via Rails 8's native `rate_limit`. Exceeding the limit returns 429. The backing store is `memory_store` (development) and `solid_cache_store` (production). Tests use `memory_store` and call `Rails.cache.clear` in `setup` to keep buckets isolated between test cases.
 
+The login endpoint (`SessionsController#create`) is rate-limited to 5 requests per minute per IP (brute force protection). Only `create` is limited — `new` (form) and `destroy` (logout) are unrestricted.
+
 ### Public vs. Admin separation
 
 Two distinct areas with separate layouts (`application.html.erb` vs `dashboard.html.erb`):
