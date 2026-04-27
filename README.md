@@ -67,6 +67,8 @@ The dashboard controller manages `published_at` automatically:
 
 Public endpoints (`/` and `/posts/:slug`) are rate-limited to **30 requests per minute per IP** using Rails 8's built-in `rate_limit`. Exceeding the limit returns `429 Too Many Requests`. The backing store is `memory_store` (per-process, resets on restart).
 
+The login endpoint (`POST /login`) is rate-limited to **5 attempts per minute per IP** as brute force protection. The login form (`GET /login`) and logout (`DELETE /logout`) are not affected.
+
 ### Pagination
 
 Kaminari paginates index actions. Public posts: 9 per page. Dashboard posts: 15 per page.
