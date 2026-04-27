@@ -63,6 +63,10 @@ The dashboard controller manages `published_at` automatically:
 
 `Post` auto-generates a URL slug from the title on creation (via `before_validation`). Special characters are stripped and spaces become hyphens. Collisions are resolved by appending `-1`, `-2`, etc. Setting a slug manually before save skips auto-generation.
 
+### Rate limiting
+
+Public endpoints (`/` and `/posts/:slug`) are rate-limited to **30 requests per minute per IP** using Rails 8's built-in `rate_limit`. Exceeding the limit returns `429 Too Many Requests`. The backing store is `memory_store` (per-process, resets on restart).
+
 ### Pagination
 
 Kaminari paginates index actions. Public posts: 9 per page. Dashboard posts: 15 per page.
