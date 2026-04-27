@@ -1,6 +1,8 @@
 require "test_helper"
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
+  setup { Rails.cache.clear }
+
   # index
   test "GET index returns 200" do
     get root_url
@@ -58,5 +60,16 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     get post_url(posts(:draft).slug)
     assert_select "h1", text: /404/
     assert_select "a", text: /Back to Posts/
+  end
+
+  # rate limiting
+  test "GET index returns 429 after exceeding 30 requests per minute" do
+    31.times { get root_url }
+    assert_response :too_many_requests
+  end
+
+  test "GET show returns 429 after exceeding 30 requests per minute" do
+    31.times { get post_url(posts(:published).slug) }
+    assert_response :too_many_requests
   end
 end
