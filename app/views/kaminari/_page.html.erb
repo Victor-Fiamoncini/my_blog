@@ -1,0 +1,8 @@
+<% if page.current? %>
+  <span class="inline-flex items-center justify-center w-10 h-10 border-4 border-black bg-black text-white font-black text-sm select-none">
+    <%= page %>
+  </span>
+<% else %>
+  <%= link_to page, url, rel: page.rel, remote: remote,
+        class: "inline-flex items-center justify-center w-10 h-10 border-4 border-black bg-white font-black text-sm shadow-[3px_3px_0px_0px_#60a5fa] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all" %>
+<% end %>
