@@ -16,6 +16,16 @@ SQLite3 is used for all environments. Database files are stored in `storage/`:
 
 No external database server needed. The connection pool size is tied to `RAILS_MAX_THREADS` (default 5), and a `timeout` of 5000ms is set.
 
+## Credentials
+
+Secrets are managed via Rails encrypted credentials (`config/credentials.yml.enc` + `config/master.key`). Do not use `ENV[]` for app secrets — read them with `Rails.application.credentials.<key>` instead.
+
+Current credential keys:
+
+- `sentry_dsn` — Sentry DSN, read in `config/initializers/sentry.rb`
+
+Edit credentials with `bin/rails credentials:edit`. Per-environment files go in `config/credentials/<env>.yml.enc` (keys in `config/credentials/<env>.key`, gitignored via `/config/credentials/*.key`).
+
 ## Commands
 
 ```bash

@@ -89,6 +89,31 @@ bin/brakeman --no-pager             # Security scan
 bin/ci                              # Full CI: setup + lint + security + tests
 ```
 
+## Credentials
+
+Secrets are stored in Rails encrypted credentials (`config/credentials.yml.enc`), committed to git and decrypted at runtime using `config/master.key` (gitignored).
+
+To add or edit credentials:
+
+```bash
+bin/rails credentials:edit
+```
+
+Current keys:
+
+| Key | Used by |
+|---|---|
+| `sentry_dsn` | `config/initializers/sentry.rb` |
+
+For per-environment overrides, use environment-specific files:
+
+```bash
+bin/rails credentials:edit --environment production
+# creates config/credentials/production.yml.enc + config/credentials/production.key
+```
+
+In production, the master key is injected as the `RAILS_MASTER_KEY` environment variable (set via Kamal secrets).
+
 ## Stress Testing
 
 Load testing uses [k6](https://k6.io/) via Docker Compose. Requires Docker and the `RAILS_MASTER_KEY`.
